@@ -3,14 +3,37 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>$Titre</title>
+		<title>Annuaire - Underscore</title>
+		<link rel="stylesheet" type="text/css" href="../../../bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<header>
-		</header>
-		<main>
-		</main>
+    <header>
+      <div class="navbar navbar-inverse">
+        <h1 class="navbar-brand">Annuaire JS</h1>
+      </div>
+    </header>
+    <main class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <form type="post" action="#" class="input-group">
+            <input id="prenom" type="text" placeholder="prenom" class="form-control">
+            <input id="nom" type="text" placeholder="nom" class="form-control">
+            <input id="numero" type="text" placeholder="numero" class="form-control">
+            <input id="ajouter" type="submit" class="form-control btn btn-primary">
+           </form>
+         </div>
+         <ul id="liste" class="col-md-4 list-group"></ul>
+         <div class="col-md-4">
+          <form type="post" action="#" class="input-group">
+            <input id="champs" type="text" class="form-control">
+            <input type="submit" id="bouton" class="form-control btn btn-primary">
+          </form>
+            <ul id="resultatRecherche" class="list-group list-group-item-info"></ul>
+         </div>
+      </div>
+    </main>
+    <script type="text/javascript" src="../../../underscore-js/underscore/underscore.js"></script>
     <script type="text/javascript" src="app.js"></script>
 	</body>
 </html>
