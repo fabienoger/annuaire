@@ -15,6 +15,23 @@ ul li {
   text-align: center;
 }
 
-#liste ul li span {
+#liste li span {
   cursor: pointer;
+}
+
+#liste li img {
+  /*float: left;*/
+}
+
+.ageMoyen {
+  margin: 15px auto;
+}
+
+.updateContact {
+  transition: 1s;
+  display: none;
+}
+
+.clear {
+  clear: both;
 }

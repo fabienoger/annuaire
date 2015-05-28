@@ -30,24 +30,40 @@ annuaire = [{
 function afficherList(){
   elements = "";
   _.each(annuaire, function(contact, index) {
-    elements += "<li class='list-group-item'><img src='img/ios7-contact-outline.png' width='50' height='50'>" + contact.prenom + " " + contact.nom + " " + contact.numero + " " + contact.age + "<span id='user-"+ index +" 'class='glyphicon glyphicon-remove pull-right' aria-hidden='true'></span></li>";
+    elements += "<li class='list-group-item'><div><span id='update-"+ index +"'class='glyphicon glyphicon-pencil pull-left' aria-hidden='true'></span><img src='img/ios7-contact-outline.png' width='50' height='50'>" + contact.prenom + " " + contact.nom + " " + contact.numero + " " + contact.age + "<span id='user-"+ index +" 'class='glyphicon glyphicon-remove pull-right' aria-hidden='true'></span><div class='clear'></div></div><div id='showUpdate-"+ index +"'class='updateContact'><form type='post' action='#' class='input-group'><input id='prenom' type='text' placeholder='Prenom' class='form-control' required><input id='nom' type='text' placeholder='Nom' class='form-control' required><input id='numero' type='text' placeholder='Numero' class='form-control' required><input id='age' type='number' placeholder='Age' class='form-control' required><input id='sendUpdate-"+ index +"' type='submit' class='form-control btn btn-primary'></form></div></li>";
   });
   $liste.innerHTML = elements ;
 }
 
 function addList(){
-  annuaire.push({prenom: $prenom.value, nom: $nom.value, numero: $numero.value, age: $age.value});
-  $prenom.value = "";
-  $nom.value = "";
-  $numero.value = "";
-  $age.value = "";
-  afficherList();
-  ageMoyen();
-  saveLocal();
+  if(idUpdate > annuaire.length){
+    annuaire.push({prenom: $prenom.value, nom: $nom.value, numero: $numero.value, age: $age.value});
+    $prenom.value = "";
+    $nom.value = "";
+    $numero.value = "";
+    $age.value = "";
+    afficherList();
+    ageMoyen();
+    saveLocal();
+  }
+  else if(idUpdate <= annuaire.length){
+    annuaire[idUpdate].prenom = $prenom.value;
+    annuaire[idUpdate].nom = $nom.value;
+    annuaire[idUpdate].numero = $numero.value;
+    annuaire[idUpdate].age = $age.value;
+    $prenom.value = "";
+    $nom.value = "";
+    $numero.value = "";
+    $age.value = "";
+    afficherList();
+    ageMoyen();
+    saveLocal();
+    idUpdate = annuaire.length + 1;
+  }
 }
 
 function texteContact(contact) {
-  return "<li class='list-group-item'><img src='img/ios7-contact-outline.png' width='50' height='50'>" + contact.prenom + " " +  contact.nom  + " (" + contact.numero + " " + contact.age + ")</li>" ;
+  return "<li class='list-group-item'><img src='img/ios7-contact-outline.png' width='50' height='50'>" + contact.prenom + " " + contact.nom  + " " + contact.numero + " " + contact.age + " </li>";
 }
 
 function rechercheContact(){
@@ -66,14 +82,21 @@ function rechercheContact(){
   }
 }
 
-function deleteContact(e) {
+function select(e){
   tag = e.target;
   idTag = tag.id.split("-")[1];
-  if (idTag <= annuaire.length){
+  if (tag.id.split("-")[0] == "user" && idTag <= annuaire.length){
     annuaire.splice(idTag, 1);
     afficherList();
+    saveLocal();
   }
-  ageMoyen();
+  else if (tag.id.split("-")[0] == "update"){
+    $prenom.value = (annuaire[idTag].prenom);
+    $nom.value = (annuaire[idTag].nom);
+    $numero.value = (annuaire[idTag].numero);
+    $age.value = (annuaire[idTag].age);
+    idUpdate = idTag;
+  }
 }
 
 function ageMoyen() {
@@ -97,6 +120,8 @@ recupLocal();
 afficherList();
 ageMoyen();
 
+idUpdate = annuaire.length + 1;
+
 $ajouter.onclick = addList;
 $champs.onkeyup = rechercheContact;
-$liste.onclick = deleteContact;
+$liste.onclick = select
