@@ -14,3 +14,7 @@ ul {
 ul li {
   text-align: center;
 }
+
+#liste ul li span {
+  cursor: pointer;
+}

@@ -17,11 +17,13 @@
       <div class="row">
         <div class="col-md-4">
           <form type="post" action="#" class="input-group">
-            <input id="prenom" type="text" placeholder="prenom" class="form-control">
-            <input id="nom" type="text" placeholder="nom" class="form-control">
-            <input id="numero" type="text" placeholder="numero" class="form-control">
+            <input id="prenom" type="text" placeholder="prenom" class="form-control" required>
+            <input id="nom" type="text" placeholder="nom" class="form-control" required>
+            <input id="numero" type="text" placeholder="numero" class="form-control" required>
+            <input id="age" type="number" placeholder="Age" class="form-control" required>
             <input id="ajouter" type="submit" class="form-control btn btn-primary">
            </form>
+            <p id="ageMoyen"></p>
          </div>
          <ul id="liste" class="col-md-4 list-group"></ul>
          <div class="col-md-4">
